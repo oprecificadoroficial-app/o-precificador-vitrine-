@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vitrine pública sincronizada com O Precificador">
+  <meta name="theme-color" content="#2d7d46">
+  <title>Vitrine — O Precificador</title>
+  <style>
+    :root{--primary:#2d7d46;--secondary:#81c995;--ink:#17221a;--muted:#667268;--line:#dfe9e1;--soft:#edf6ef}
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#edf6ef 0,#f7faf7 360px,#f7faf7 100%);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+    .shell{max-width:1120px;margin:auto;padding:18px 16px 58px}
+    .hero{position:relative;overflow:hidden;padding:34px 30px;border-radius:26px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;box-shadow:0 18px 42px #2d7d4630}
+    .hero:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-90px;top:-120px;background:#ffffff20}
+    .hero-content{position:relative;z-index:1;max-width:760px}
+    .eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;opacity:.82}
+    h1{margin:8px 0 10px;font-size:clamp(30px,6vw,56px);line-height:1.02;letter-spacing:-.04em}
+    .hero p{max-width:680px;margin:0;line-height:1.6;color:#f2fff4}
+    .contacts{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.contacts span{padding:7px 10px;border:1px solid #ffffff40;border-radius:999px;background:#ffffff18;font-size:12px}
+    .tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:24px 0 14px}
+    .search{flex:1;min-width:230px;padding:13px 15px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:inherit;outline:none;box-shadow:0 4px 14px #17221a0a}.search:focus{border-color:var(--primary);box-shadow:0 0 0 3px #2d7d4620}
+    .filters{display:flex;gap:7px;flex-wrap:wrap}.filter{border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:#fff;color:var(--muted);font-weight:700;cursor:pointer}.filter.active{background:var(--primary);border-color:var(--primary);color:#fff}
+    .status{min-height:22px;color:var(--muted);font-size:13px;margin:2px 0 14px}.status.error{color:#b3261e}
+    .section-title{margin:20px 0 12px;color:var(--primary);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.card{display:flex;flex-direction:column;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px #17221a0b;transition:transform .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px #17221a16}
+    .art{height:170px;display:flex;align-items:center;justify-content:center;background:var(--soft);font-size:58px;overflow:hidden}.art img{width:100%;height:100%;object-fit:contain;background:#fff}
+    .card-body{display:flex;flex-direction:column;flex:1;padding:17px}.tag{color:var(--primary);font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}.card h2{margin:7px 0;font-size:20px;line-height:1.12}.card p{min-height:38px;margin:5px 0;color:var(--muted);font-size:13px;line-height:1.5}.price{margin:12px 0;color:var(--primary);font-size:23px;font-weight:900}.price del{margin-right:6px;color:#89938b;font-size:13px;font-weight:600}.card-button,.back{display:inline-flex;justify-content:center;align-items:center;padding:10px 12px;border:0;border-radius:9px;background:var(--primary);color:#fff;text-decoration:none;font-size:12px;font-weight:800;cursor:pointer}.empty{grid-column:1/-1;padding:34px;text-align:center;border:1px dashed #b9cbbd;border-radius:16px;color:var(--muted);background:#fff}
+    .detail{display:none;padding:22px;background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 24px #17221a0b}.detail.show{display:block}.detail h2{margin:14px 0 8px;font-size:clamp(28px,5vw,44px);line-height:1.04}.detail-image{display:block;width:100%;max-height:360px;object-fit:contain;margin:18px 0;border-radius:14px;background:var(--soft)}.detail p{color:var(--muted);line-height:1.65;white-space:pre-line}.info{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.info span{min-width:130px;padding:10px 12px;border-radius:10px;background:var(--soft);color:#334638;font-size:13px}.info b{display:block;margin-bottom:3px;color:#718074;font-size:10px;text-transform:uppercase}.details{padding-top:16px;border-top:1px solid var(--line)}.footer{margin-top:32px;text-align:center;color:#6b776e;font-size:12px;line-height:1.7}.hidden{display:none!important}
+    @media(max-width:820px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.shell{padding:10px 10px 42px}.hero{padding:26px 22px;border-radius:20px}.grid{grid-template-columns:1fr}.art{height:150px}.tools{align-items:stretch}.search{min-width:100%}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="hero" id="topo"><div class="hero-content"><span class="eyebrow">Vitrine da empresa</span><h1 id="empresaNome">Carregando…</h1><p id="empresaDescricao"></p><div class="contacts" id="empresaContatos"></div></div></header>
+    <section class="tools" aria-label="Filtros da vitrine"><input class="search" id="busca" type="search" placeholder="Buscar produto ou serviço"><div class="filters"><button class="filter active" data-filtro="todos">Todos</button><button class="filter" data-filtro="produto">Produtos</button><button class="filter" data-filtro="servico">Serviços</button></div></section>
+    <div class="status" id="status">Carregando vitrine…</div>
+    <section id="catalogo"><h2 class="section-title">Produtos e serviços</h2><div class="grid" id="lista"></div></section>
+    <section id="detalhe" class="detail"></section>
+    <footer class="footer" id="rodape"></footer>
+  </main>
+  <script>
+    const API_URL='https://yorxktadmsmhamircrlt.supabase.co/functions/v1/vitrine';
+    const VITRINE_SLUG=new URLSearchParams(location.search).get('slug')||'minha-vitrine-teste';
+    const state={identity:null,items:[],filtro:'todos',busca:''};
+    const $=id=>document.getElementById(id);
+    const esc=value=>String(value??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+    const money=value=>Number(value||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+    const color=value=>/^#[0-9a-f]{6}$/i.test(String(value||''))?String(value):'#2d7d46';
+    function currentPrice(item){return Number(item.preco_promocional||0)>0?item.preco_promocional:item.preco}
+    function visibleItems(){const term=state.busca.toLowerCase().trim();return state.items.filter(item=>(state.filtro==='todos'||item.tipo===state.filtro)&&(!term||[item.nome,item.categoria,item.descricao,item.marca].join(' ').toLowerCase().includes(term)))}
+    function renderIdentity(){const e=state.identity||{};document.title=`${e.nome_exibicao||'Vitrine'} — O Precificador`;document.documentElement.style.setProperty('--primary',color(e.cor_primaria));document.documentElement.style.setProperty('--secondary',color(e.cor_secundaria));$('empresaNome').textContent=e.nome_exibicao||'Minha empresa';$('empresaDescricao').textContent=e.descricao_publica||'Produtos e serviços publicados.';const contatos=e.mostrar_contato!==false?[e.telefone,e.whatsapp,e.email_publico].filter(Boolean):[];$('empresaContatos').innerHTML=contatos.map(v=>`<span>${esc(v)}</span>`).join('');const endereco=e.mostrar_endereco!==false?[e.endereco_publico,[e.cidade,e.estado].filter(Boolean).join(' - '),e.cep].filter(Boolean).join(' · '):'';$('rodape').innerHTML=`${esc(e.nome_exibicao||'Minha empresa')}${endereco?`<br>${esc(endereco)}`:''}<br><small>Os custos, margens, fretes e insumos permanecem privados.</small>`}
+    function card(item){const old=Number(item.preco_promocional||0)>0?`<del>${money(item.preco)}</del> `:'';const art=item.imagem_url?`<img src="${esc(item.imagem_url)}" alt="${esc(item.nome)}">`:(item.tipo==='produto'?'📦':'🔧');return `<article class="card"><div class="art">${art}</div><div class="card-body"><span class="tag">${esc(item.tipo)}${item.categoria?` · ${esc(item.categoria)}`:''}</span><h2>${esc(item.nome)}</h2>${item.subtitulo?`<p><strong>${esc(item.subtitulo)}</strong></p>`:''}<p>${esc(item.descricao)}</p><div class="price">${old}${money(currentPrice(item))}</div><button class="card-button" data-item="${esc(item.item_slug)}">Ver página do item</button></div></article>`}
+    function detail(item){const old=Number(item.preco_promocional||0)>0?`<del>${money(item.preco)}</del> `:'';return `<button class="back" id="voltar">← Voltar à vitrine</button><span class="tag">${esc(item.tipo)}${item.categoria?` · ${esc(item.categoria)}`:''}</span><h2>${esc(item.nome)}</h2>${item.imagem_url?`<img class="detail-image" src="${esc(item.imagem_url)}" alt="${esc(item.nome)}">`:''}${item.subtitulo?`<p><strong>${esc(item.subtitulo)}</strong></p>`:''}<p>${esc(item.descricao)}</p><div class="price">${old}${money(currentPrice(item))}</div>${item.marca||item.origem||item.disponibilidade?`<div class="info">${item.marca?`<span><b>Marca</b>${esc(item.marca)}</span>`:''}${item.origem?`<span><b>Origem</b>${esc(item.origem)}</span>`:''}${item.disponibilidade?`<span><b>Disponibilidade</b>${esc(item.disponibilidade)}</span>`:''}</div>`:''}${item.detalhes?`<div class="details"><h3>Informações detalhadas</h3><p>${esc(item.detalhes)}</p></div>`:''}`}
+    function renderList(){const list=visibleItems();$('lista').innerHTML=list.length?list.map(card).join(''):'<div class="empty">Nenhum item encontrado.</div>';document.querySelectorAll('[data-item]').forEach(btn=>btn.addEventListener('click',()=>openDetail(btn.dataset.item)))}
+    function openDetail(slug){const item=state.items.find(v=>v.item_slug===slug);if(!item)return;$('catalogo').classList.add('hidden');$('detalhe').innerHTML=detail(item);$('detalhe').classList.add('show');$('detalhe').querySelector('#voltar').addEventListener('click',closeDetail);history.pushState({item:slug},'',`?slug=${encodeURIComponent(VITRINE_SLUG)}&item=${encodeURIComponent(slug)}#item`);scrollTo(0,0)}
+    function closeDetail(){ $('detalhe').classList.remove('show');$('detalhe').innerHTML='';$('catalogo').classList.remove('hidden');history.pushState({},'',`?slug=${encodeURIComponent(VITRINE_SLUG)}`);scrollTo(0,0)}
+    async function load(){try{const response=await fetch(`${API_URL}?slug=${encodeURIComponent(VITRINE_SLUG)}&format=json`,{cache:'no-store'});if(!response.ok)throw new Error('A vitrine não está disponível.');const data=await response.json();state.identity=data.identity;state.items=Array.isArray(data.items)?data.items:[];renderIdentity();renderList();$('status').textContent=`${state.items.length} item(ns) publicados • dados carregados do Supabase`;}catch(error){$('status').className='status error';$('status').textContent='Não foi possível carregar a vitrine agora.';$('lista').innerHTML='<div class="empty">Tente novamente em alguns instantes.</div>'}}
+    $('busca').addEventListener('input',event=>{state.busca=event.target.value;renderList()});document.querySelectorAll('[data-filtro]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-filtro]').forEach(v=>v.classList.remove('active'));btn.classList.add('active');state.filtro=btn.dataset.filtro;renderList()}));window.addEventListener('popstate',()=>{const item=new URLSearchParams(location.search).get('item');if(item)openDetail(item);else closeDetail()});load();
+  </script>
+</body>
+</html>
